@@ -7,14 +7,16 @@ const axiosApi: AxiosInstance = axios.create({
   baseURL: BASE_URL,
 });
 
-const fetchUsers = async (): Promise<{
+const fetchUsers = async (
+  userId?: string
+): Promise<{
   data: User[];
   status: number;
 }> => {
   const response: AxiosResponse<User[]> = await axiosApi.get<
     any,
     AxiosResponse<User[]>
-  >("/users");
+  >(`/users${userId ? `?id=${userId}` : ""}`);
   return {
     data: response.data,
     status: response.status,

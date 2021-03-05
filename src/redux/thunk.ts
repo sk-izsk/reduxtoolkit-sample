@@ -3,10 +3,10 @@ import { fetchUsers } from "../api";
 import { RootState } from "./store";
 import { addUser } from "./userSlice";
 
-const getUsers = () => {
+const getUsers = (userId?: string) => {
   return async (dispatch: Dispatch, getState: RootState) => {
     try {
-      const response = await fetchUsers();
+      const response = await fetchUsers(userId);
       if (response?.status === 200) {
         dispatch(addUser(response.data));
       }
